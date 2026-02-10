@@ -18,6 +18,18 @@ categories:
   - name: 도서
     description: 책 리뷰 및 독후감
 
+  - name: Animal
+    description: Animal 관련
+
+  - name: Insect
+    description: Insect 관련
+
+  - name: SUB_CATEGORY
+    description: SUB_CATEGORY 관련
+
+  - name: TOP_CATEGORY
+    description: TOP_CATEGORY 관련
+
 # 태그 정의
 tags:
   - name: 시작하기
@@ -40,6 +52,12 @@ tags:
 
   - name: book-review
     description: 책 리뷰
+
+  - name: TAG
+    description: TAG 관련
+
+  - name: bee
+    description: bee 관련
 
 # 사용 예시:
 # categories: [개발, Python]
