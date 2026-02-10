@@ -59,6 +59,12 @@ tags:
   - name: bee
     description: bee 관련
 
+  - name: 자바
+    description: 자바 관련
+
+  - name: 자바의 신
+    description: 자바의 신 관련
+
 # 사용 예시:
 # categories: [개발, Python]
 # tags: [시작하기, tutorial, python]
