@@ -11,6 +11,11 @@ if ([string]::IsNullOrWhiteSpace($title)) {
 }
 
 # URL 슬러그 입력
+Write-Host ""
+Write-Host "💡 팁: 제목이 '$title'인 경우," -ForegroundColor Yellow
+Write-Host "   좋은 예: java-tutorial, python-basics, book-review-1" -ForegroundColor Yellow
+Write-Host ""
+
 while ($true) {
     $slug = Read-Host "URL 슬러그 (영문, 예: python-tutorial)"
 
@@ -18,17 +23,36 @@ while ($true) {
         # 슬러그가 비어있으면 제목에서 자동 생성 (영문/숫자/하이픈만)
         $filename = $title.ToLower() -replace '\s+', '-' -replace '[^a-z0-9-]', '' -replace '--+', '-' -replace '^-|-$', ''
         if ([string]::IsNullOrWhiteSpace($filename)) {
-            Write-Host "⚠️  영문 슬러그를 입력해주세요." -ForegroundColor Yellow
+            Write-Host "⚠️  제목에 영문이 없습니다. 영문 슬러그를 입력해주세요." -ForegroundColor Yellow
             continue
         }
         break
     } else {
+        # 한글 포함 여부 확인
+        if ($slug -match '[가-힣]') {
+            Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Yellow
+            Write-Host "⚠️  한글이 감지되었습니다!" -ForegroundColor Yellow
+            Write-Host "💡 제목 '$title'을(를) 영문으로 표현하면?" -ForegroundColor Blue
+            Write-Host "   예시:" -ForegroundColor Green
+            Write-Host "   • 자바의 신 1장 → java-god-chapter-1" -ForegroundColor Green
+            Write-Host "   • 파이썬 기초 → python-basics" -ForegroundColor Green
+            Write-Host "   • 알고리즘 정렬 → algorithm-sorting" -ForegroundColor Green
+            Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Yellow
+            continue
+        }
+
         # 입력된 슬러그 검증 (영문, 숫자, 하이픈만 허용)
         $cleanSlug = $slug.ToLower() -replace '[^a-z0-9-]', '' -replace '--+', '-' -replace '^-|-$', ''
         if ($slug -ne $cleanSlug) {
-            Write-Host "⚠️  한글이나 특수문자는 사용할 수 없습니다. 영문, 숫자, 하이픈(-)만 사용하세요." -ForegroundColor Yellow
-            Write-Host "💡 추천 슬러그: $cleanSlug" -ForegroundColor Blue
-            continue
+            Write-Host "⚠️  특수문자가 포함되어 있습니다." -ForegroundColor Yellow
+            Write-Host "💡 자동 정리된 슬러그: $cleanSlug" -ForegroundColor Blue
+            $useClean = Read-Host "이 슬러그를 사용하시겠습니까? (Y/n)"
+            if ($useClean -match '^[Yy]$' -or [string]::IsNullOrWhiteSpace($useClean)) {
+                $filename = $cleanSlug
+                break
+            } else {
+                continue
+            }
         }
         $filename = $cleanSlug
         break
