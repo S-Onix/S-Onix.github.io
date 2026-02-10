@@ -34,15 +34,16 @@ bash tools/new-post.sh
 
 ---
 
-### 2. 빠른 배포
+### 2. 빠른 배포 ⭐
 
 ```bash
 bash tools/deploy.sh
 ```
 
 **기능:**
+- ✨ **자동 Taxonomy 동기화**: 새 카테고리/태그 자동 등록
+- Conventional Commit 타입 선택
 - 변경된 파일 목록 표시
-- 커밋 메시지 입력
 - 자동으로 add, commit, push
 - GitHub Actions 링크 제공
 
@@ -356,6 +357,30 @@ git blog-serve
 ---
 
 ## 🔧 고급 사용
+
+### Taxonomy 수동 동기화
+
+포스트에서 사용된 카테고리/태그를 수동으로 동기화하려면:
+
+```bash
+# Bash
+bash tools/sync-taxonomy.sh
+
+# PowerShell
+.\tools\sync-taxonomy.ps1
+```
+
+**기능:**
+- 모든 포스트를 스캔하여 사용된 카테고리/태그 추출
+- `_data/blog-taxonomy.yml`과 비교
+- 새로운 항목을 자동으로 추가
+
+**언제 사용하나요?**
+- `deploy.sh`는 자동으로 실행하므로 보통은 필요 없음
+- 수동으로 taxonomy를 정리하고 싶을 때
+- 배포 전에 미리 확인하고 싶을 때
+
+---
 
 ### 포스트 템플릿 커스터마이징
 

@@ -11,6 +11,11 @@ NC='\033[0m'
 echo -e "${BLUE}🚀 블로그 배포 시작${NC}"
 echo ""
 
+# Taxonomy 자동 동기화
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+bash "$script_dir/sync-taxonomy.sh"
+echo ""
+
 # 변경사항 확인
 if [[ -z $(git status -s) ]]; then
     echo -e "${YELLOW}⚠️  변경사항이 없습니다.${NC}"
