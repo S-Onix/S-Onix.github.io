@@ -11,11 +11,28 @@ if ([string]::IsNullOrWhiteSpace($title)) {
 }
 
 # URL 슬러그 입력
-$slug = Read-Host "URL 슬러그 (영문, 예: python-tutorial)"
-if ([string]::IsNullOrWhiteSpace($slug)) {
-    $filename = $title.ToLower() -replace '\s+', '-' -replace '[^\w가-힣-]', ''
-} else {
-    $filename = $slug.ToLower() -replace '[^\w-]', '' -replace '\s+', '-'
+while ($true) {
+    $slug = Read-Host "URL 슬러그 (영문, 예: python-tutorial)"
+
+    if ([string]::IsNullOrWhiteSpace($slug)) {
+        # 슬러그가 비어있으면 제목에서 자동 생성 (영문/숫자/하이픈만)
+        $filename = $title.ToLower() -replace '\s+', '-' -replace '[^a-z0-9-]', '' -replace '--+', '-' -replace '^-|-$', ''
+        if ([string]::IsNullOrWhiteSpace($filename)) {
+            Write-Host "⚠️  영문 슬러그를 입력해주세요." -ForegroundColor Yellow
+            continue
+        }
+        break
+    } else {
+        # 입력된 슬러그 검증 (영문, 숫자, 하이픈만 허용)
+        $cleanSlug = $slug.ToLower() -replace '[^a-z0-9-]', '' -replace '--+', '-' -replace '^-|-$', ''
+        if ($slug -ne $cleanSlug) {
+            Write-Host "⚠️  한글이나 특수문자는 사용할 수 없습니다. 영문, 숫자, 하이픈(-)만 사용하세요." -ForegroundColor Yellow
+            Write-Host "💡 추천 슬러그: $cleanSlug" -ForegroundColor Blue
+            continue
+        }
+        $filename = $cleanSlug
+        break
+    }
 }
 
 $date = Get-Date -Format "yyyy-MM-dd"

@@ -20,17 +20,31 @@ if [ -z "$title" ]; then
 fi
 
 # URL 슬러그 입력 (파일명용)
-echo -n "URL 슬러그를 입력하세요 (영문, 예: python-tutorial): "
-read slug
+while true; do
+    echo -n "URL 슬러그를 입력하세요 (영문, 예: python-tutorial): "
+    read slug
 
-if [ -z "$slug" ]; then
-    echo -e "${YELLOW}⚠️  슬러그가 비어있습니다. 제목에서 자동 생성합니다.${NC}"
-    # 한글 포함 가능하도록 수정
-    filename=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9가-힣-]//g')
-else
-    # 슬러그를 소문자로 변환하고 정리
-    filename=$(echo "$slug" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd '[:alnum:]-')
-fi
+    if [ -z "$slug" ]; then
+        # 슬러그가 비어있으면 제목에서 자동 생성 (영문/숫자/하이픈만)
+        filename=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+        if [ -z "$filename" ]; then
+            echo -e "${YELLOW}⚠️  영문 슬러그를 입력해주세요.${NC}"
+            continue
+        fi
+        echo -e "${YELLOW}⚠️  슬러그가 비어있습니다. 자동 생성: ${filename}${NC}"
+        break
+    else
+        # 입력된 슬러그 검증 (영문, 숫자, 하이픈만 허용)
+        clean_slug=$(echo "$slug" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+        if [ "$slug" != "$clean_slug" ]; then
+            echo -e "${YELLOW}⚠️  한글이나 특수문자는 사용할 수 없습니다. 영문, 숫자, 하이픈(-)만 사용하세요.${NC}"
+            echo -e "${BLUE}💡 추천 슬러그: ${clean_slug}${NC}"
+            continue
+        fi
+        filename="$clean_slug"
+        break
+    fi
+done
 
 date=$(date +"%Y-%m-%d")
 time=$(date +"%H:%M:%S")
