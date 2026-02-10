@@ -1,10 +1,10 @@
 ---
 title: 자바의 신 1장
 date: 2026-02-10 21:46:26 +0900
-categories: [도서]  # 예: [개발, Python]
-tags: [자바의 신, 자바]        # 예: [python, tutorial]
+categories: [도서, 개발]
+tags: [java, book-review]
 image:
-  path: /assets/img/posts/2026-02-10-자바의-신-1장/cover.jpg
+  path: /assets/img/posts/2026-02-10-java-god-chapter-1/cover.jpg
   alt: 자바의 신 1장
 ---
 

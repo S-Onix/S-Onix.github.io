@@ -15,6 +15,9 @@ categories:
   - name: 데모
     description: 예제 및 데모
 
+  - name: 도서
+    description: 책 리뷰 및 독후감
+
 # 태그 정의
 tags:
   - name: 시작하기
@@ -31,6 +34,12 @@ tags:
 
   - name: typography
     description: 타이포그래피 및 텍스트 스타일
+
+  - name: java
+    description: 자바 프로그래밍
+
+  - name: book-review
+    description: 책 리뷰
 
 # 사용 예시:
 # categories: [개발, Python]
