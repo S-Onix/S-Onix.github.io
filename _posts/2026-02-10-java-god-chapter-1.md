@@ -1,7 +1,7 @@
 ---
 title: 자바의 신 1장
 date: 2026-02-10 21:46:26 +0900
-categories: [도서]  # 예: [개발, Python]
+categories: [도서, 자바의 신]  # 예: [개발, Python]
 tags: [자바의 신, 자바]        # 예: [python, tutorial]
 ---
 

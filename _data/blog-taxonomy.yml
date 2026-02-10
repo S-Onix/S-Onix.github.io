@@ -30,6 +30,9 @@ categories:
   - name: TOP_CATEGORY
     description: TOP_CATEGORY 관련
 
+  - name: 자바의 신
+    description: 자바의 신 관련
+
 # 태그 정의
 tags:
   - name: 시작하기
