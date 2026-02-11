@@ -28,3 +28,6 @@ assets/js/dist
 
 # Image optimization temp files
 .processed_images
+
+# Windows reserved device names
+nul
