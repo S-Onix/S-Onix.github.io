@@ -11,64 +11,58 @@ NC='\033[0m'
 echo -e "${BLUE}📝 Typora용 새 포스트 생성${NC}"
 echo ""
 
-# 제목 입력
-echo -n "포스트 제목을 입력하세요: "
+# 파일명(슬러그) 입력
+echo -e "${YELLOW}💡 팁: 좋은 파일명 예시: java-tutorial, python-basics, book-review-1${NC}"
+echo ""
+
+while true; do
+    echo -n "파일명(슬러그)을 입력하세요 (영문, 예: python-tutorial): "
+    read slug
+
+    if [ -z "$slug" ]; then
+        echo -e "${YELLOW}⚠️  파일명을 입력해주세요.${NC}"
+        continue
+    fi
+
+    # 한글 포함 여부 확인
+    if echo "$slug" | grep -q '[가-힣]'; then
+        echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo -e "${YELLOW}⚠️  한글이 감지되었습니다!${NC}"
+        echo -e "${GREEN}   예시:${NC}"
+        echo -e "${GREEN}   • 자바의 신 1장 → java-god-chapter-1${NC}"
+        echo -e "${GREEN}   • 파이썬 기초 → python-basics${NC}"
+        echo -e "${GREEN}   • 알고리즘 정렬 → algorithm-sorting${NC}"
+        echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        continue
+    fi
+
+    # 입력된 슬러그 검증 (영문, 숫자, 하이픈만 허용)
+    clean_slug=$(echo "$slug" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+    if [ "$slug" != "$clean_slug" ]; then
+        echo -e "${YELLOW}⚠️  특수문자가 포함되어 있습니다.${NC}"
+        echo -e "${BLUE}💡 자동 정리된 슬러그: ${clean_slug}${NC}"
+        read -p "이 슬러그를 사용하시겠습니까? (Y/n): " use_clean
+        if [[ "$use_clean" =~ ^[Yy]$ ]] || [ -z "$use_clean" ]; then
+            filename="$clean_slug"
+            break
+        else
+            continue
+        fi
+    fi
+    filename="$clean_slug"
+    break
+done
+
+# 포스트 제목 입력 (블로그에 표시되는 제목, 한글 가능)
+echo ""
+echo -e "${BLUE}📌 블로그에 표시될 제목을 입력하세요 (한글 가능)${NC}"
+echo -n "포스트 제목: "
 read title
 
 if [ -z "$title" ]; then
     echo -e "${YELLOW}⚠️  제목이 비어있습니다. 종료합니다.${NC}"
     exit 1
 fi
-
-# URL 슬러그 입력
-echo ""
-echo -e "${YELLOW}💡 팁: 제목이 '${title}'인 경우,${NC}"
-echo -e "${YELLOW}   좋은 예: java-tutorial, python-basics, book-review-1${NC}"
-echo ""
-
-while true; do
-    echo -n "URL 슬러그 (영문, 예: python-tutorial): "
-    read slug
-
-    if [ -z "$slug" ]; then
-        # 슬러그가 비어있으면 제목에서 자동 생성 (영문/숫자/하이픈만)
-        filename=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
-        if [ -z "$filename" ]; then
-            echo -e "${YELLOW}⚠️  제목에 영문이 없습니다. 영문 슬러그를 입력해주세요.${NC}"
-            continue
-        fi
-        break
-    else
-        # 한글 포함 여부 확인
-        if echo "$slug" | grep -q '[가-힣]'; then
-            echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-            echo -e "${YELLOW}⚠️  한글이 감지되었습니다!${NC}"
-            echo -e "${BLUE}💡 제목 '${title}'을(를) 영문으로 표현하면?${NC}"
-            echo -e "${GREEN}   예시:${NC}"
-            echo -e "${GREEN}   • 자바의 신 1장 → java-god-chapter-1${NC}"
-            echo -e "${GREEN}   • 파이썬 기초 → python-basics${NC}"
-            echo -e "${GREEN}   • 알고리즘 정렬 → algorithm-sorting${NC}"
-            echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-            continue
-        fi
-
-        # 입력된 슬러그 검증 (영문, 숫자, 하이픈만 허용)
-        clean_slug=$(echo "$slug" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
-        if [ "$slug" != "$clean_slug" ]; then
-            echo -e "${YELLOW}⚠️  특수문자가 포함되어 있습니다.${NC}"
-            echo -e "${BLUE}💡 자동 정리된 슬러그: ${clean_slug}${NC}"
-            read -p "이 슬러그를 사용하시겠습니까? (Y/n): " use_clean
-            if [[ "$use_clean" =~ ^[Yy]$ ]] || [ -z "$use_clean" ]; then
-                filename="$clean_slug"
-                break
-            else
-                continue
-            fi
-        fi
-        filename="$clean_slug"
-        break
-    fi
-done
 
 date=$(date +"%Y-%m-%d")
 time=$(date +"%H:%M:%S")
