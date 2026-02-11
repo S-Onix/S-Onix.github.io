@@ -81,6 +81,12 @@ for post in _posts/*.md; do
         needs_fix=true
     fi
 
+    # Typora 상대 경로 수정 (../assets → /assets)
+    if grep -q '\.\./assets/' "$post" 2>/dev/null; then
+        sed -i 's|\.\./assets/|/assets/|g' "$post"
+        needs_fix=true
+    fi
+
     if [ "$needs_fix" = true ]; then
         fixed_count=$((fixed_count + 1))
         echo -e "${GREEN}  ✅ 경로 수정: $(basename "$post")${NC}"
