@@ -18,7 +18,7 @@ tags: [자바의 신, 자바]        # 예: [python, tutorial]
 - 윈도의 명령 프롬프트
 - 단축키 windows+R 누른 이후  cmd 입력
 
-![image-20260211213129140](C:\S-Onix.github.io\assets\img\posts\2026-02-11-java-god-chapter-2\image-20260211213129140.png)
+![image-20260211213129140](/assets/img/posts/2026-02-11-java-god-chapter-2/image-20260211213129140.png)
 
 
 
@@ -26,7 +26,7 @@ tags: [자바의 신, 자바]        # 예: [python, tutorial]
 
 - cmd 화면에서 `java` 를 입력 > 아래와 같은 화면이 나오면 정상적으로 설치된 것이 확인된다.
 
-  ![image-20260211213716470](C:\S-Onix.github.io\assets\img\posts\2026-02-11-java-god-chapter-2\image-20260211213716470.png)
+  ![image-20260211213716470](/assets/img/posts/2026-02-11-java-god-chapter-2/image-20260211213716470.png)
 
 
 

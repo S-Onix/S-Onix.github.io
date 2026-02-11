@@ -61,6 +61,25 @@ fi
 # Conventional Commit 형식으로 조합
 full_commit_message="${commit_type}: ${commit_message}"
 
+# 이미지 경로 자동 변환 (Windows 절대 경로 → 상대 경로)
+echo -e "${BLUE}🔄 이미지 경로 검사 중...${NC}"
+fixed_count=0
+for post in _posts/*.md; do
+    if grep -q 'C:\\S-Onix' "$post" 2>/dev/null || grep -q 'C:/S-Onix' "$post" 2>/dev/null; then
+        # Windows 절대 경로를 상대 경로로 변환 (이미지 라인만 대상)
+        sed -i '/!\[/s|C:\\S-Onix\.github\.io\\|/|g' "$post"
+        sed -i '/!\[/s|C:/S-Onix\.github\.io/|/|g' "$post"
+        # 이미지 라인의 백슬래시만 슬래시로 변환
+        sed -i '/!\[/s|\\|/|g' "$post"
+        fixed_count=$((fixed_count + 1))
+        echo -e "${GREEN}  ✅ 경로 수정: $(basename "$post")${NC}"
+    fi
+done
+if [ "$fixed_count" -eq 0 ]; then
+    echo -e "${GREEN}  ✅ 모든 이미지 경로가 정상입니다.${NC}"
+fi
+echo ""
+
 # Git 작업
 echo ""
 echo -e "${BLUE}📦 변경사항 커밋 중...${NC}"
