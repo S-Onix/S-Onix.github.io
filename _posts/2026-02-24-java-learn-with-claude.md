@@ -1,5 +1,5 @@
 ---
-title: 자바 JVM 파헤쳐보기
+title: 자바 JVM 파헤쳐보기1
 date: 2026-02-24 17:26:23 +0900
 categories: [자바, 클로드, F-lab]  # 예: [개발, Python]
 tags: [자바, JVM]        # 예: [python, tutorial]
