@@ -3,9 +3,6 @@ title: 자바 GC 파혜쳐보기
 date: 2026-02-25 17:52:52 +0900
 categories: [자바, 클로드, F-lab]  # 예: [개발, Python]
 tags: [자바, GC]        # 예: [python, tutorial]
-image:
-  path: /assets/img/posts/2026-02-25-java-learn-with-claude-gc/cover.jpg
-  alt: 자바 GC 파혜쳐보기
 ---
 
 ## 📌 소개
