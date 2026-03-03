@@ -32,8 +32,6 @@ Tomcat의 기본 동작 방식은 **Thread-per-Request** 모델입니다. 요청
 
 스레드를 요청마다 새로 만들면 생성/소멸 비용이 큽니다. 그래서 미리 스레드를 N개 만들어놓고, 요청이 오면 빌려주고, 끝나면 반납받는 **Thread Pool** 방식을 사용합니다.
 
-yaml
-
 ```yaml
 # application.yml
 server:
@@ -64,8 +62,6 @@ server:
 ## 3. Blocking I/O — 스레드가 멈추고 기다리는 방식
 
 Blocking I/O란, 외부 작업(DB 조회, API 호출, 파일 읽기)의 결과가 올 때까지 현재 스레드가 아무것도 하지 않고 기다리는 방식입니다.
-
-java
 
 ```java
 // 이 한 줄이 실행되는 동안 현재 스레드는 완전히 멈춤

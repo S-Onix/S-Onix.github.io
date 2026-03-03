@@ -16,8 +16,6 @@ tags: [자바, 스프링, Web]        # 예: [python, tutorial]
 
 Servlet이란, Java로 HTTP 요청을 받아서 응답을 만드는 **표준 규격(인터페이스)**입니다. "주문이 들어오면 이런 형식으로 받고, 이런 형식으로 응답해라"라는 약속이죠.
 
-java
-
 ```java
 public class MyServlet extends HttpServlet {
     @Override
