@@ -1,5 +1,5 @@
 ---
-title: Spring 깊이 이해하기7편 - WebFlux
+title: Spring 깊이 이해하기 8편 - WebFlux
 date: 2026-03-04 15:49:40 +0900
 categories: [자바, 클로드, F-lab]  # 예: [개발, Python]
 tags: [자바, 스프링, Web]        # 예: [python, tutorial]
