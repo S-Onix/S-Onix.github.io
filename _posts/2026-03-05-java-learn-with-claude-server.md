@@ -7,7 +7,8 @@ tags: [자바, 스프링, Web, server]        # 예: [python, tutorial]
 
 ## 📌 소개
 
-여기에 내용을 작성하세요.
+- 소개 : 클로드 문답형식을 이용한 WAS 학습
+- 목표 : Tomcat, Netty에 대한 이해
 
 ## 📝 본문
 
