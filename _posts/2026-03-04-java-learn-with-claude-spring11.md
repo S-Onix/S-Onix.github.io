@@ -1,6 +1,6 @@
 ---
-title: Spring 깊이 이해하기 10편 - Hexagonal Architecture
-date: 2026-03-04 16:39:46 +0900
+title: Spring 깊이 이해하기 11편 - Hexagonal Architecture
+date: 2026-03-04 17:52:46 +0900
 categories: [자바, 클로드, F-lab]  # 예: [개발, Python]
 tags: [자바, 스프링, Web]        # 예: [python, tutorial]
 ---

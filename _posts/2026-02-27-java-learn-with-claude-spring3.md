@@ -1,6 +1,6 @@
 ---
 title: Spring 깊이 이해하기 3편 - Thread Model과 Blocking I/O
-date: 2026-02-27 16:12:35 +0900
+date: 2026-02-27 16:14:35 +0900
 categories: [자바, 클로드, F-lab]  # 예: [개발, Python]
 tags: [자바, 스프링, Web]        # 예: [python, tutorial]
 ---
